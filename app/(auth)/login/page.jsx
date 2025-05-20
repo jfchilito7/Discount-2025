@@ -1,16 +1,17 @@
 'use client'
 
 import { Button } from '@heroui/react';
+import Link from 'next/link';
 import React from 'react'
 
 function page() {
     return (
-        <main className='w-full flex justify-center items-center bg-gray-300 p-24 min-h-screen'>
+        <main className='w-full flex justify-center items-center bg-gray-300 md:p-24 p-10 min-h-screen'>
             <section className='flex flex-col gap-3'>
             <div className='flex justify-center'>
                 <img  className='h-12' src="/logo.png" alt="Logo" />
             </div>
-            <div className='flex flex-col gap-3 bg-white p-10 rounded-xl min-w-[440px]'>
+            <div className='flex flex-col gap-3 bg-white md:p-10 p-5 rounded-xl md:min-w-[440px] w-full'>
                 <h1 className='font-bold text-xl'>Ingresa con tu Email</h1>
                 <form action="" className='flex flex-col gap-3'>
                     <input 
@@ -18,7 +19,7 @@ function page() {
                         type="email" 
                         name='user-email' 
                         id='user-email'
-                        className='px-3 py-2 rounded border focus:outline-none w-full'
+                        className='px-3 py-2 rounded-xl border focus:outline-none w-full'
                     />
 
                     <input 
@@ -26,10 +27,20 @@ function page() {
                         type="password" 
                         name='user-password' 
                         id='user-password'
-                        className='px-3 py-2 rounded border focus:outline-none w-full'
+                        className='px-3 py-2 rounded-xl border focus:outline-none w-full'
                     />
-                    <Button>Ingresar</Button>
+                    <Button color='primary'>Ingresar</Button>
                 </form>
+                <div className='flex justify-between'>
+                    <Link href={`/sign-up`}>
+                        <button className='font-semibold text-sm text-blue-700'>Crear nueva cuenta</button>
+                    </Link>
+                    <Link href={`/forget-password`}>
+                        <button className='font-semibold text-sm text-blue-700'>Olvido su Contraseña?</button>
+                    </Link>
+                </div>
+                <hr />
+                <Button>Ingresa con Google</Button>
             </div>
             </section>
         </main>
