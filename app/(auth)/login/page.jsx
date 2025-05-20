@@ -1,10 +1,25 @@
 'use client'
 
+import { useAuth } from '@/contexts/AuthContext';
+import { auth } from '@/lib/firestore/firestore';
 import { Button } from '@heroui/react';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Link from 'next/link';
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 
 function page() {
+
+    const { user } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (user) {
+            router.push('/dashboard');
+        }
+    }, [user]);
+
     return (
         <main className='w-full flex justify-center items-center bg-gray-300 md:p-24 p-10 min-h-screen'>
             <section className='flex flex-col gap-3'>
@@ -40,11 +55,27 @@ function page() {
                     </Link>
                 </div>
                 <hr />
-                <Button>Ingresa con Google</Button>
+                <SignInWithGoogle />
             </div>
             </section>
         </main>
     );
+}
+
+function SignInWithGoogle() {
+    const [isLoading, setIsLoading] = useState(false);
+    const handleLogin = async () => {
+        setIsLoading(true);
+        try {
+            await signInWithPopup(auth, new GoogleAuthProvider());
+        } catch (error) {
+            toast.error(error?.message || "Error al iniciar sesión");
+        }
+        setIsLoading(false);
+    };
+    return ( 
+        <Button isLoading={isLoading} isDisabled={isLoading} onClick={handleLogin}>Ingresa con Google</Button>
+    )
 }
 
 export default page
