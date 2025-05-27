@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import { collection, deleteDoc, doc, setDoc, Timestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../firestore";
 
@@ -24,3 +24,10 @@ export const createNewCategory = async ({ data, image }) => {
         timestampCreated: Timestamp.now(),
     })
 };
+
+export const deleteCategory = async ({id}) => {
+    if (!id) {
+        throw new Error("El ID de la categoría es obligatorio para eliminarla");
+    }
+    await deleteDoc(doc(db, `categories/${id}`));
+}
