@@ -13,7 +13,7 @@ function ListView() {
     if (isLoading) {
         return (
             <div>
-                <CircularProgress />
+                <CircularProgress aria-label='Cargando contenido...' />
             </div>
         )
     }

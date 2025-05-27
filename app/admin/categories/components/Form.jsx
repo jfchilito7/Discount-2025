@@ -99,7 +99,7 @@ function Form() {
                             }
                         }}
                         className='border px-4 py-2 rounded-lg w-full focus:outline-none'
-                        id='category-image ' 
+                        id='category-image' 
                         name='category-image'
                         type="file" 
                         placeholder='Ingresa el nombre' />
@@ -110,7 +110,7 @@ function Form() {
                     </label>
                     <input 
                         className='border px-4 py-2 rounded-lg w-full focus:outline-none'
-                        id='category-name ' 
+                        id='category-name' 
                         name='category-name'
                         type="text" 
                         placeholder='Ingresa el nombre'

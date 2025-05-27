@@ -20,7 +20,7 @@ function AdminChecking({children}) {
     const router = useRouter();
 
     useEffect(() => {
-        if (!user && !isLoading) {
+        if (!isLoading && !user ) {
             router.push('/login');
         }
     }, [user, isLoading]);
@@ -28,17 +28,13 @@ function AdminChecking({children}) {
     if (isLoading) {
         return (
             <div className='h-screen w-screen flex justify-center items-center'>
-                <CircularProgress />
+                <CircularProgress aria-label='Cargando contenido...' />
             </div>
         )
     }
 
     if (!user) {
-        return (
-            <div className='h-screen w-screen flex justify-center items-center'>
-                <h1>Por favor Ingresa primero!</h1>
-            </div>
-        )
+        return null;
     }
 
     return <AdminLayout>{children}</AdminLayout>
