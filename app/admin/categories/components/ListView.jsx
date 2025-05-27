@@ -3,6 +3,7 @@ import { useCategories } from '@/lib/firestore/categories/read'
 import { deleteCategory } from '@/lib/firestore/categories/write';
 import { Button, CircularProgress } from '@heroui/react';
 import { Edit2, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 
@@ -25,7 +26,7 @@ function ListView() {
     }
 
     return (
-        <div className='flex-1 flex flex-col gap-3 rounded-xl px-5'>
+        <div className='flex-1 flex flex-col gap-3 rounded-xl md:pr-5 md:px-0 px-5'>
             <h1 className='text-xl'>Categorias</h1>
             <table className='border-separate border-spacing-y-3'>
                 <thead>
@@ -49,7 +50,9 @@ function ListView() {
 }
 
 function Row({ item, index }) {
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false)
+    const router = useRouter();
+    ;
     const handleDelete = async () => {
         if (!confirm('¿Estás seguro de que deseas eliminar esta categoría?')) 
             return;
@@ -62,6 +65,11 @@ function Row({ item, index }) {
         }
         setIsDeleting(false);
     }
+
+    const handleUpdate = () => {
+        router.push(`/admin/categories?id=${item?.id}`);
+    }
+
     return (
         <tr key={item.id ?? index}>
             <td className='border-y bg-white px-3 py-2 border-l rounded-l-lg text-center'>{index + 1}</td>
@@ -73,7 +81,7 @@ function Row({ item, index }) {
             <td className='border-y bg-white px-3 py-2'>{item.name}</td>
             <td className='border-y bg-white px-3 py-2 border-r rounded-r-lg'>
                 <div className='flex gap-2 items-center'>
-                    <Button isDisabled={isDeleting} isIconOnly size='sm'>
+                    <Button onClick={handleUpdate} isDisabled={isDeleting} isIconOnly size='sm'>
                         <Edit2 size={13}/>
                     </Button>
                     <Button onClick={handleDelete} isLoading={isDeleting} isDisabled={isDeleting} isIconOnly size='sm' color='danger'>
