@@ -1,7 +1,7 @@
 'use client'
 import { auth } from '@/lib/firestore/firestore'
 import { signOut } from 'firebase/auth'
-import { Cat, Layers2, LayoutDashboardIcon, LibraryBig, LogOut, PackageOpen, ShoppingCart, Star, User } from 'lucide-react'
+import { Cat, Layers2, LayoutDashboardIcon, LibraryBig, LogOut, PackageOpen, ShieldCheck, ShoppingCart, Star, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -48,6 +48,11 @@ function Sidebar() {
             name: 'Colecciones',
             link: '/admin/collections',
             icon: <LibraryBig className='h-5 w-5' />,
+        },
+        {
+            name: 'Adminstradores',
+            link: '/admin/admins',
+            icon: <ShieldCheck className='h-5 w-5' />,
         },
     ]
     return (
