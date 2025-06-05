@@ -96,6 +96,62 @@ function BasicDetails({ data, handleData }) {
                     })}
                 </select>
             </div>
+
+            <div className='flex flex-col gap-1'>
+                <label htmlFor="product-stock" className='text-gray-500 text-xs'> 
+                    Stock <span className='text-red-500'>*</span>
+                </label>
+                <input 
+                    type="number" 
+                    placeholder='Ingresa stock' 
+                    id='product-stock' 
+                    name='product-stock' 
+                    className='border px-4 py-2 rounded-lg w-full outline-none'
+                    value={data?.stock ?? ''}
+                    onChange={(e) =>{
+                        handleData('stock', e.target.valueAsNumber)
+                    }}
+                    required
+                />
+            </div>
+
+            <div className='flex flex-col gap-1'>
+                <label htmlFor="product-price" className='text-gray-500 text-xs'> 
+                    Precio <span className='text-red-500'>*</span>
+                </label>
+                <input 
+                    type="number" 
+                    placeholder='Ingresa precio' 
+                    id='product-price' 
+                    name='product-price' 
+                    className='border px-4 py-2 rounded-lg w-full outline-none'
+                    value={data?.price ?? ''}
+                    onChange={(e) =>{
+                        handleData('price', e.target.valueAsNumber)
+                    }}
+                    required
+                />
+            </div>
+
+            <div className='flex flex-col gap-1'>
+                <label htmlFor="product-sale-price" className='text-gray-500 text-xs'> 
+                    Precio de venta<span className='text-red-500'>*</span>
+                </label>
+                <input 
+                    type="number" 
+                    placeholder='Ingresa precio de venta' 
+                    id='product-sale-price' 
+                    name='product-sale-price' 
+                    className='border px-4 py-2 rounded-lg w-full outline-none'
+                    value={data?.salePrice ?? ''}
+                    onChange={(e) =>{
+                        handleData('salePrice', e.target.valueAsNumber)
+                    }}
+                    required
+                />
+            </div>
+
+            
         </section>
     )
 }
