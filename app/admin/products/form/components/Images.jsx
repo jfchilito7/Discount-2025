@@ -2,7 +2,7 @@ import React from 'react'
 
 function Images( { data, setFeatureImage, featureImage, imageList, setImageList } ) {
     return (
-        <section className='flex-1 flex flex-col gap-3 bg-white border p-4 rounded-xl'>
+        <section className='flex flex-col gap-3 bg-white border p-4 rounded-xl'>
             <h1 className='font-semibold'>Imagenes</h1>
             <div className='flex flex-col gap-1'>
                 {featureImage && (
