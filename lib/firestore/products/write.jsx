@@ -1,6 +1,6 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../firestore";
-import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import { collection, deleteDoc, doc, setDoc, Timestamp } from "firebase/firestore";
 
 export const createNewProduct = async ({data, featureImage, imageList}) => {
 
@@ -33,4 +33,11 @@ export const createNewProduct = async ({data, featureImage, imageList}) => {
         id: newId,
         timestampCreate: Timestamp.now(),
     })
+}
+
+export const deleteProduct = async ({id}) => {
+    if (!id) {
+        throw new Error("El ID de la categoría es obligatorio para eliminarla");
+    }
+    await deleteDoc(doc(db, `products/${id}`));
 }
