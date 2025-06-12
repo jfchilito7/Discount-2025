@@ -27,7 +27,7 @@ function ListView() {
     }
 
     return (
-        <div className='flex-1 flex flex-col gap-3 rounded-xl md:pr-5 md:px-0 px-5'>
+        <div className='flex-1 flex flex-col gap-3 rounded-xl md:pr-5 md:px-0 px-5 w-full overflow-x-auto'>
             <table className='border-separate border-spacing-y-3'>
                 <thead>
                     <tr>
@@ -81,8 +81,8 @@ function Row({ item, index }) {
                     <img className='h-10 w-10 object-cover' src={item?.featureImageURL} alt="" />
                 </div>
             </td>
-            <td className='border-y bg-white px-3 py-2'>{item.title}</td>
-            <td className='border-y bg-white px-3 py-2'>
+            <td className='border-y bg-white px-3 py-2 whitespace-nowrap'>{item.title}</td>
+            <td className='border-y bg-white px-3 py-2 whitespace-nowrap'>
                 {item?.salePrice < item?.price && (
                     <span className='text-xs text-gray-500 line-through'>
                     $ {item.price}
