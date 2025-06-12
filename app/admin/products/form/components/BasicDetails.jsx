@@ -22,7 +22,7 @@ function BasicDetails({ data, handleData }) {
                     className='border px-4 py-2 rounded-lg w-full outline-none'
                     value={data?.title ?? ''}
                     onChange={(e) => {
-                        handleData('shortDescription', e.target.value)
+                        handleData('title', e.target.value)
                     }}
                     required
                 />

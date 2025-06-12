@@ -34,8 +34,10 @@ function Images( { data, setFeatureImage, featureImage, imageList, setImageList 
             <div className='flex flex-col gap-1'>
                 {imageList.length > 0 && 
                     <div className='flex flex-wrap gap-3'>
-                        {imageList?.map((item) => {
-                            return <img className='w-20 object-cover rounded-lg'
+                        {imageList?.map((item, index) => {
+                            return <img 
+                                key={item.name + index}
+                                className='w-20 object-cover rounded-lg'
                                 src={URL.createObjectURL(item)} 
                                 alt='imagen' ></img>
                         })}

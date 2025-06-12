@@ -53,7 +53,7 @@ export default function Description({ data, handleData }) {
                 <button onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}>🧹</button>
             </div>
 
-            <div className="min-h-[150px] border rounded-md p-2 w-full max-w-3xl">
+            <div className="min-h-[45px] border rounded-md p-2 w-full max-w-3xl">
                 <EditorContent editor={editor} className="editor-content" />
             </div>
         </section>
