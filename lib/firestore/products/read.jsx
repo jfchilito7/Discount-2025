@@ -1,23 +1,40 @@
 'use client'
 
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, limit, onSnapshot, query, startAfter } from 'firebase/firestore'
 import useSWRSubscription from 'swr/subscription'
 import { db } from '../firestore'
 
-export function useProducts() {
-    const { data, error } = useSWRSubscription(['products'], ([path], { next }) => {
+export function useProducts({ pageLimit, lastSnapDoc }) {
+    const { data, error } = useSWRSubscription(['products', pageLimit, lastSnapDoc], ([path, pageLimit, lastSnapDoc], { next }) => {
     const ref = collection(db, path);
-    const unsub = onSnapshot(ref,
+    let q = query(ref, limit(pageLimit ?? 10));
+
+    if (lastSnapDoc) {
+        q = query(q, startAfter(lastSnapDoc));
+    }
+
+    const unsub = onSnapshot(q,
         (snapshot) => 
             next(
                 null,
-                snapshot.docs.length === 0
+                {
+                    list : snapshot.docs.length === 0
                     ? null
-                    : snapshot.docs.map((snap) => snap.data())),
+                    : snapshot.docs.map((snap) => snap.data()),
+                    lastSnapDoc : snapshot.docs.length === 0
+                    ? null
+                    : snapshot.docs[snapshot.docs.length - 1],
+                }
+                ),
         err => next(err, null)
     )
     return () => unsub();
     })
 
-    return { data, error: error?.message, isLoading: data === undefined };
+    return {
+        data : data?.list, 
+        lastSnapDoc : data?.lastSnapDoc, 
+        error: error?.message, 
+        isLoading: data === undefined 
+    };
 }
