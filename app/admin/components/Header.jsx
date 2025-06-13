@@ -5,7 +5,7 @@ import React from 'react'
 
 function Header({ toggleSidebar }) {
     return (
-        <section className='flex items-center gap-3 bg-white border-b px-4 py-4'>
+        <section className='fixed w-full top-0 flex items-center gap-3 bg-white border-b px-4 py-4'>
             <div className='flex justify-center items-center md:hidden'>
                 <button onClick={toggleSidebar}>
                     <Menu className='h-6 w-6 ' />
