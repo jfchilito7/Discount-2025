@@ -5,6 +5,15 @@ function Images( { data, setFeatureImage, featureImage, imageList, setImageList 
         <section className='flex flex-col gap-3 bg-white border p-4 rounded-xl'>
             <h1 className='font-semibold'>Imagenes</h1>
             <div className='flex flex-col gap-1'>
+                {data?.featureImageURL && !featureImage && (
+                    <div className='flex justify-center'>
+                        <img
+                            className='h-20 object-cover rounded-lg'
+                            src={data?.featureImageURL} 
+                            alt="Imagen" 
+                        />
+                    </div>
+                )}
                 {featureImage && (
                     <div className='flex justify-center'>
                         <img
@@ -27,12 +36,23 @@ function Images( { data, setFeatureImage, featureImage, imageList, setImageList 
                             setFeatureImage(e.target.files[0])
                         }
                     }}
-                    required
                 />
             </div>
 
             <div className='flex flex-col gap-1'>
-                {imageList.length > 0 && 
+                {imageList.length === 0 && data?.imageList?.length != 0 && ( 
+                    <div className='flex flex-wrap gap-3'>
+                        {data?.imageList?.map((item, index) => {
+                            return <img 
+                                key={item.name + index}
+                                className='w-20 object-cover rounded-lg'
+                                src={item} 
+                                alt='imagen' ></img>
+                        })}
+                    </div>
+                )}
+
+                {imageList.length > 0 && ( 
                     <div className='flex flex-wrap gap-3'>
                         {imageList?.map((item, index) => {
                             return <img 
@@ -42,7 +62,7 @@ function Images( { data, setFeatureImage, featureImage, imageList, setImageList 
                                 alt='imagen' ></img>
                         })}
                     </div>
-                }
+                )}
                 <label htmlFor="product-images" className='text-gray-500 text-xs'> 
                     Imagenes <span className='text-red-500'>*</span>
                 </label>
@@ -60,7 +80,6 @@ function Images( { data, setFeatureImage, featureImage, imageList, setImageList 
                             setImageList(newFiles);
                         }
                     }
-                    required
                 />
             </div>
         </section>
