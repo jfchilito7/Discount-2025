@@ -37,7 +37,7 @@ export const createNewProduct = async ({data, featureImage, imageList}) => {
 
 export const deleteProduct = async ({id}) => {
     if (!id) {
-        throw new Error("El ID de la categoría es obligatorio para eliminarla");
+        throw new Error("El ID del producto es obligatorio para eliminarla");
     }
     await deleteDoc(doc(db, `products/${id}`));
 }

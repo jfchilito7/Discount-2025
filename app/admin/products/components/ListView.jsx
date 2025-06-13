@@ -104,14 +104,14 @@ function Row({ item, index }) {
     const [isDeleting, setIsDeleting] = useState(false)
     const router = useRouter();
     const handleDelete = async () => {
-        if (!confirm('¿Estás seguro de que deseas eliminar esta categoría?')) 
+        if (!confirm('¿Estás seguro de que deseas eliminar este producto?')) 
             return;
         setIsDeleting(true);
         try {
             await deleteProduct({id: item?.id})
-            toast.success('Categoría eliminada correctamente');
+            toast.success('Producto eliminada correctamente');
         } catch (error) {
-            toast.error(error?.message || 'Error al eliminar la categoría');
+            toast.error(error?.message || 'Error al eliminar el producto');
         }
         setIsDeleting(false);
     }
